@@ -8,4 +8,4 @@ var server = net.createServer(function(socket) {
 		console.log('%s',data);
 	})
 });
-	server.listen(8000);
+	server.listen(port);
