@@ -3,15 +3,14 @@ var url = require('url');
 var port = process.env.PORT || 3000;
 
 var logs=[];
-var other=[];
 
 var server = http.createServer(function(req, res){
 	res.writeHead(200, {'Content-Type': 'text/plain'});
 	
 	if (req.url == "/log"){
-		logs.push(res)
+		logs.push(res);
 		console.log('added to the log array');
-
+		res.write("<html><head><body>Hey, you're listening to the log!\n")
 	} else {
 		var query = url.parse(req.url).query
 		if (query != undefined){
@@ -22,9 +21,9 @@ var server = http.createServer(function(req, res){
 				logs[i].write('<br/>\n');
 			}
 		}
-		res.end('ok');
+		res.write('<html><body>OK</body></html>')
+		res.end();
 	}
-	
 });
 
 server.listen(port);
