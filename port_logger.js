@@ -10,7 +10,7 @@ var server = http.createServer(function(req, res){
 	if (req.url == "/log"){
 		logs.push(res);
 		console.log('added to the log array');
-		res.write("Hey, you're listening to the log!\n")
+		res.write("You're listening to the log #" + logs.length + "\n")
 	} else {
 		var query = url.parse(req.url).query
 		if (query != undefined){
@@ -21,8 +21,7 @@ var server = http.createServer(function(req, res){
 				logs[i].write('\n');
 			}
 		}
-		res.write('Ok')
-		res.end();
+		res.end('Ok');
 	}
 });
 
