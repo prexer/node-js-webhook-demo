@@ -91,7 +91,6 @@ margin-top:20px; margin-bottom:10px; text-align:left;">
 
 <div>
 <button onclick="getLog('start');">Start Viewer</button>
-
 <button onclick="stopTail();">Stop Viewer</button>
 </div>
 <p>
@@ -101,8 +100,9 @@ This is a very simple, yet powerful, log file viewer.
 <p>
 This page (the one you are reading now) contains
 buttons that fire two functions - <code>startLog()</code> and <code>stopLog()</code>.
-These functions will read the log file referenced above & update the log div with the results, one line at a time every two seconds without reloading this page. 
+These functions will read the log file referenced above and update the log div with the results, one line at a time every two seconds without reloading this page. 
 </p>
+
 To see this in action, click <b>Start Viewer</b> above and then click <b>Generate Log Output</b> in the other window.  The Log Viewer div will then update asynchronously with the new log file lines that are written.
 For best affect, click the <b>Generate</b> button several times.  To stop the updating, click the <b>Stop Viewer</b> button.
 
