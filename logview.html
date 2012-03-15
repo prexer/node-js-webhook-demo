@@ -1,128 +1,124 @@
 <html>
-<head>
-<script type="text/javascript">
-function createRequest() {
- var request = null;
-  try {
-   request = new XMLHttpRequest();
-  } catch (trymicrosoft) {
-   try {
-     request = new ActiveXObject("Msxml2.XMLHTTP");
-   } catch (othermicrosoft) {
-     try {
-      request = new ActiveXObject("Microsoft.XMLHTTP");
-     } catch (failed) {
-       request = null;
-     }
-   }
- }
- 
- if (request == null) {
-   alert("Error creating request object!");
- } else {
-   return request;
- }
-}
- 
-var request1 = createRequest();
+	<head>
+		<script type="text/javascript">
+			function createRequest() {
+				var request = null;
+				try {
+					request = new XMLHttpRequest();
+				} catch (trymicrosoft) {
+					try {
+						request = new ActiveXObject("Msxml2.XMLHTTP");
+					} catch (othermicrosoft) {
+						try {
+							request = new ActiveXObject("Microsoft.XMLHTTP");
+						} catch (failed) {
+							request = null;
+						}
+					}
+				}
 
-</script>
-<script type="text/javascript">
-/* an ajax log file tailer / viewer
-copyright 2007 john minnihan.
-http://freepository.com
-Released under these terms
-1. This script, associated functions and HTML code ("the code") may be used by you ("the recipient") for any purpose.
-2. This code may be modified in any way deemed useful by the recipient.
-3. This code may be used in derivative works of any kind, anywhere, by the recipient.
-4. Your use of the code indicates your acceptance of these terms.
-5. This notice must be kept intact with any use of the code to provide attribution.
-*/
-function getLog(timer) {
+				if(request == null) {
+					alert("Error creating request object!");
+				} else {
+					return request;
+				}
+			}
 
-var url = "http://webhookslog.herokuapp.com/tmp/logfile.txt";
-//var url = "./tmp/logfile.txt";
-request1.open("GET", url, true);
-request1.onreadystatechange = updatePage;
-request1.send(null);
-startTail(timer);
-}
+			var request1 = createRequest();
 
-function startTail(timer) {
-if (timer == "stop") {
-stopTail();
-} else {
-t= setTimeout("getLog()",1000);
-}
-}
+		</script>
+		<script type="text/javascript">
+			/* an ajax log file tailer / viewer
+			 copyright 2007 john minnihan.
+			 http://freepository.com
+			 Released under these terms
+			 1. This script, associated functions and HTML code ("the code") may be used by you ("the recipient") for any purpose.
+			 2. This code may be modified in any way deemed useful by the recipient.
+			 3. This code may be used in derivative works of any kind, anywhere, by the recipient.
+			 4. Your use of the code indicates your acceptance of these terms.
+			 5. This notice must be kept intact with any use of the code to provide attribution.
+			 */
+			function getLog(timer) {
 
-function stopTail() {
-clearTimeout(t);
-var pause = "The log viewer has been paused. To begin viewing again, click the Start Viewer button.\n";
-logDiv = document.getElementById("log");
-var newNode=document.createTextNode(pause);
-logDiv.replaceChild(newNode,logDiv.childNodes[0]);
-}
+				var url = "http://webhookslog.herokuapp.com/tmp/logfile.txt";
+				//var url = "./tmp/logfile.txt";
+				request1.open("GET", url, true);
+				request1.onreadystatechange = updatePage;
+				request1.send(null);
+				startTail(timer);
+			}
 
-function updatePage() {
-if (request1.readyState == 4) {
-if (request1.status == 200) {
-var currentLogValue = request1.responseText.split("\n");
-eval(currentLogValue);
-logDiv = document.getElementById("log");
-var logLine = ' ';
-for (i=0; i < currentLogValue.length - 1; i++) {
-logLine += currentLogValue[i] + "<br/>\n";
-}
-logDiv.innerHTML=logLine;
-} else
-alert("Error! Request status is " + request1.status);
-}
-}
-</script>
-</head>
-<body>
+			function startTail(timer) {
+				if(timer == "stop") {
+					stopTail();
+				} else {
+					t = setTimeout("getLog()", 1000);
+				}
+			}
 
-<div id="message" style="border:solid 1px #dddddd; width:500px; margin-left:25px; font-size:14px; font-family:san-serif,tahoma,arial;
-padding-left:15px; padding-right:15px; padding-top:10px; padding-bottom:20px;
-margin-top:20px; margin-bottom:10px; text-align:left;">
-<p>
-<h2>AJAX Log File Viewer - ALFV</h2>
+			function stopTail() {
+				clearTimeout(t);
+				var pause = "The log viewer has been paused. To begin viewing again, click the Start Viewer button.\n";
+				logDiv = document.getElementById("log");
+				var newNode = document.createTextNode(pause);
+				logDiv.replaceChild(newNode, logDiv.childNodes[0]);
+			}
 
-<div>
-<button onclick="getLog('start');">Start Viewer</button>
-
-<button onclick="stopTail();">Stop Viewer</button>
-</div>
-<p>
-This is a very simple, yet powerful, log file viewer. </p>
-<p>
-Each time you click the <b>Generate Log Output</b> button in that page, a line is written to the logfile. Note that by using two windows, we are illustrating how the div in this
-window may be updated asychronously - that's the AJAX part of this log file viewer. In actual use, you would substitute your own real log file for the simulated logfile 
-named <b>ajax-logfile-viewer.log</b>.  If you don't generate any new output, it will appear to stop updating.  This is a limit of the simulated logfile, not the Ajax Logfile Viewer.
-</p>
-
-<p>
-This page (the one you are reading now) contains
-buttons that fire two functions - <code>startLog()</code> and <code>stopLog()</code>.
-These functions will read the log file referenced above & update the log div with the results, one line at a time every two seconds without reloading this page. 
-</p>
-To see this in action, click <b>Start Viewer</b> above and then click <b>Generate Log Output</b> in the other window.  The Log Viewer div will then update asynchronously with the new log file lines that are written.
-For best affect, click the <b>Generate</b> button several times.  To stop the updating, click the <b>Stop Viewer</b> button.
-
-
-<p>
-See <a href="http://commavee.com/2007/04/13/ajax-logfile-tailer-viewer/">http://commavee.com/2007/04/13/ajax-logfile-tailer-viewer/</a> for code samples and
-further explanation.  This is a working example of the AJAX Log File Viewer discussed there.
-</p>
-</div>
-
-<div id="log" style="border:solid 1px #dddddd; width:490px; margin-left:575px; margin-top:-547px; font-size:11px;
-padding-left:5px; padding-right:10px; padding-top:10px; padding-bottom:20px;
-margin-bottom:10px; text-align:left; height: 150px; overflow:auto;">
-<h3>Log Viewer Div</h3>
-This is the Log Viewer. To begin viewing the log live in this window, click Start Viewer. To stop the window refreshes, click Stop Viewer.
-</div>
-
-</body>
+			function updatePage() {
+				if(request1.readyState == 4) {
+					if(request1.status == 200) {
+						var currentLogValue = request1.responseText.split("\n");
+						eval(currentLogValue);
+						logDiv = document.getElementById("log");
+						var logLine = ' ';
+						for( i = 0; i < currentLogValue.length - 1; i++) {
+							logLine += currentLogValue[i] + "<br/>\n";
+						}
+						logDiv.innerHTML = logLine;
+					} else
+						alert("Error! Request status is " + request1.status);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="message" style="border:solid 1px #dddddd; width:500px; margin-left:25px; font-size:14px; font-family:san-serif,tahoma,arial;
+		padding-left:15px; padding-right:15px; padding-top:10px; padding-bottom:20px;
+		margin-top:20px; margin-bottom:10px; text-align:left;">
+			<p>
+				<h2>AJAX Log File Viewer - ALFV</h2>
+				<div>
+					<button onclick="getLog('start');">
+						Start Viewer
+					</button>
+					<button onclick="stopTail();">
+						Stop Viewer
+					</button>
+				</div>
+			<p>
+				This is a very simple, yet powerful, log file viewer.
+			</p>
+			<p>
+				This page (the one you are reading now) contains
+				buttons that fire two functions - <code>
+					startLog()</code>
+				and <code>
+					stopLog()</code>
+				.
+				These functions will read the log file referenced above & update the log div with the results, one line at a time every two seconds without reloading this page.
+			</p>
+			To see this in action, click <b>Start Viewer</b> above and then click <b>Generate Log Output</b> in the other window.  The Log Viewer div will then update asynchronously with the new log file lines that are written.
+			For best affect, click the <b>Generate</b> button several times.  To stop the updating, click the <b>Stop Viewer</b> button.
+			<p>
+				See <a href="http://commavee.com/2007/04/13/ajax-logfile-tailer-viewer/">http://commavee.com/2007/04/13/ajax-logfile-tailer-viewer/</a> for code samples and
+				further explanation.  This is a working example of the AJAX Log File Viewer discussed there.
+			</p>
+		</div>
+		<div id="log" style="border:solid 1px #dddddd; width:490px; margin-left:575px; margin-top:-547px; font-size:11px;
+		padding-left:5px; padding-right:10px; padding-top:10px; padding-bottom:20px;
+		margin-bottom:10px; text-align:left; height: 150px; overflow:auto;">
+			<h3>Log Viewer Div</h3>
+			This is the Log Viewer. To begin viewing the log live in this window, click Start Viewer. To stop the window refreshes, click Stop Viewer.
+		</div>
+	</body>
 </html>
