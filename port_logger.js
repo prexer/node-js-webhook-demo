@@ -10,7 +10,7 @@ var server = http.createServer(function(req, res){
 		console.log('another log client');
 	    res.writeHead(200, {'Content-Type': 'text/html'});
 		res.end(logview);
-	} else if (req.url == "/logfile.txt"){
+	} else if (req.url == "/tmp/logfile.txt"){
 	    console.log('ajax request');
 	    res.writeHead(200, {'Content-Type': 'text/html'});
 	    res.end(fs.readFileSync('./tmp/logfile.txt'));

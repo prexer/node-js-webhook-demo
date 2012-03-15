@@ -1,6 +1,5 @@
 <html>
 <head>
-<title> AJAX Log viewer</title>
 <script type="text/javascript">
 function createRequest() {
  var request = null;
@@ -91,21 +90,32 @@ margin-top:20px; margin-bottom:10px; text-align:left;">
 
 <div>
 <button onclick="getLog('start');">Start Viewer</button>
+
 <button onclick="stopTail();">Stop Viewer</button>
 </div>
 <p>
-This is a very simple, yet powerful, log file viewer. 
+This is a very simple, yet powerful, log file viewer.  It allows you to tail any logfile for which the user rendering the page has access.  In this example, we are simulating the output 
+of a logfile.  Open this page <a href="https://freepository.com/ajax-logtail-viewer/reload-me.php">Generate Log Output</a> in a new window.
+</p>
+<p>
+Each time you click the <b>Generate Log Output</b> button in that page, a line is written to the logfile. Note that by using two windows, we are illustrating how the div in this
+window may be updated asychronously - that's the AJAX part of this log file viewer. In actual use, you would substitute your own real log file for the simulated logfile 
+named <b>ajax-logfile-viewer.log</b>.  If you don't generate any new output, it will appear to stop updating.  This is a limit of the simulated logfile, not the Ajax Logfile Viewer.
 </p>
 
 <p>
 This page (the one you are reading now) contains
 buttons that fire two functions - <code>startLog()</code> and <code>stopLog()</code>.
-These functions will read the log file referenced above and update the log div with the results, one line at a time every two seconds without reloading this page. 
+These functions will read the log file referenced above & update the log div with the results, one line at a time every two seconds without reloading this page. 
 </p>
-
 To see this in action, click <b>Start Viewer</b> above and then click <b>Generate Log Output</b> in the other window.  The Log Viewer div will then update asynchronously with the new log file lines that are written.
 For best affect, click the <b>Generate</b> button several times.  To stop the updating, click the <b>Stop Viewer</b> button.
 
+
+<p>
+See <a href="http://commavee.com/2007/04/13/ajax-logfile-tailer-viewer/">http://commavee.com/2007/04/13/ajax-logfile-tailer-viewer/</a> for code samples and
+further explanation.  This is a working example of the AJAX Log File Viewer discussed there.
+</p>
 </div>
 
 <div id="log" style="border:solid 1px #dddddd; width:490px; margin-left:575px; margin-top:-547px; font-size:11px;
