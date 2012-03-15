@@ -4,13 +4,13 @@ var fs = require('fs');
 var logview = fs.readFileSync('logview.html');
 var port = process.env.PORT || 3000;
 
-var server = http.createServer(function(req, res)){
+var server = http.createServer(function(req, res){
 	
 	if (req.url == "/log"){
 		console.log('another log client');
 	    res.writeHead(200, {'Content-Type': 'text/html'});
 		res.end(logview);
-	if (req.url == "/logfile.txt"){
+	} else if (req.url == "/logfile.txt"){
 	    console.log('ajax request');
 	    res.writeHead(200, {'Content-Type': 'text/html'});
 	    res.end(fs.readFileSync('logfile.txt'));
