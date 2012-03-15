@@ -41,6 +41,7 @@ Released under these terms
 function getLog(timer) {
 
 var url = "http://webhookslog.herokuapp.com/tmp/logfile.txt";
+//var url = "./tmp/logfile.txt";
 request1.open("GET", url, true);
 request1.onreadystatechange = updatePage;
 request1.send(null);
