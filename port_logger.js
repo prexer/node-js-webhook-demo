@@ -28,5 +28,4 @@ var server = http.createServer(function(req, res){
 });
 
 server.listen(port);
-
 console.log('server running at %s', port);
