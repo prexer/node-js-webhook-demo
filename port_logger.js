@@ -12,7 +12,7 @@ var server = http.createServer(function(req, res){
 		res.end(logview);
 	} else if (req.url == "/tmp/logfile.txt"){
 	    console.log('ajax request');
-	    fs.read('/tmp/logfile.txt', function (err, data) {
+	    fs.readFile('/tmp/logfile.txt', function (err, data) {
 	    	if (err) throw err;
 	    	res.writeHead(200,{'Content-Type': 'text/plain'});
 	    	res.end(data);
