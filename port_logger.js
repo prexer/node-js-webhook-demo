@@ -4,7 +4,7 @@ var fs = require('fs');
 var logview = fs.readFileSync('logview.html');
 var port = process.env.PORT || 3000;
 
-var server = http.createServer(function(req, res){
+var server = http.createServer(function(req, res)){
 	
 	if (req.url == "/log"){
 		console.log('another log client');
