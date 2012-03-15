@@ -5,11 +5,15 @@ var logview = fs.readFileSync('logview.html');
 var port = process.env.PORT || 3000;
 
 var server = http.createServer(function(req, res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
 	
 	if (req.url == "/log"){
 		console.log('another log client');
+	    res.writeHead(200, {'Content-Type': 'text/html'});
 		res.end(logview);
+	if (req.url == "/logfile.txt"){
+	    console.log('ajax request');
+	    res.writeHead(200, {'Content-Type': 'text/html'});
+	    res.end(fs.readFileSync('logfile.txt'));
 	} else {
 		var query = url.parse(req.url).query;
 		if (query != undefined){
@@ -17,6 +21,7 @@ var server = http.createServer(function(req, res){
 			var log = fs.createWriteStream('log.txt', {'flags': 'a'});
 			log.write(query);	
 		}
+	    res.writeHead(200, {'Content-Type': 'text/plain'});
 		res.end(query + ':: Logged');
 	}
 });
